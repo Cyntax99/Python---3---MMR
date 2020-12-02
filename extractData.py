@@ -13,30 +13,33 @@ class extractData:
         return mmr
     #MMR for all school types
     def mmrForSchool(self,stInd,enInd):
-        pulicMMR=0
+        #Variables for storing MMR for 3 types
+        pulicMMR=0 
         privateMMR=0
         charterMMR=0
+        #For count of schools type
         priTot=0
         publTot=0
         chartTot=0
+        #Loop for state or US start index to till the state or US data ends
         for i in range(stInd,stInd+enInd):
-            sch=self.data[i][0].split(',')
-            mmr=self.data[i][0].split(',')
-            mmr=mmr[8]
+            sch=self.data[i][0].split(',') #split csv line by comma to string list
+            mmr=self.data[i][0].split(',')#
+            mmr=mmr[8] #for gettinf MMR which is at index 8 in file data
             if sch[4]=='Public':#School is Public then calculate its MMR
-                if mmr=='' or mmr=='-1':
+                if mmr=='' or mmr=='-1':#for null and -1 values treating as 0 values
                     pulicMMR=pulicMMR+0
                 else:
                     pulicMMR=pulicMMR+int(mmr)
                 publTot=publTot+1    
-            if sch[4]=='Charter':
-                if mmr=='' or mmr=='-1':
+            if sch[4]=='Charter':#School is cHARTER then calculate its MMR
+                if mmr=='' or mmr=='-1':#for null and -1 values treating as 0 values
                     charterMMR=charterMMR+0
                 else:
                     charterMMR=charterMMR+int(mmr)
                 chartTot=chartTot+1    
             if sch[4]=='Private':
-                if mmr=='' or mmr=='-1':
+                if mmr=='' or mmr=='-1':#School is Private then calculate its MMR
                     privateMMR=privateMMR+0
                 else:
                     privateMMR=privateMMR+int(mmr)
